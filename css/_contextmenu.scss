@@ -1,0 +1,23 @@
+#contextmenu {
+    background: $contextmenuBackground;
+    border: 1px solid $contextmenuBorder;
+    color: #111;
+
+    position: absolute;
+    width: 150px;
+    padding: 3px;
+    z-index: 1000;
+
+    li {
+        cursor: default;
+
+        width: 100%;
+        padding: 3px 10px;
+        
+        &:hover {
+            background: $contextmenuItemHoverBackground;
+            border: 1px solid $contextmenuItemHoverBorder;
+            border-radius: 3px;
+        }
+    }
+}

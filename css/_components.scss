@@ -1,0 +1,53 @@
+.btn {
+    cursor: pointer;
+    background: $buttonBackground;
+    border: none;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 20px;
+    color: $buttonTextColor;
+
+    padding: 3px 10px;
+
+    &:hover {
+        color: $buttonHoverTextColor;
+    }
+}
+
+.panel {
+    $menuWidth: 300px;
+    
+    background: $menuBackground;
+    border-right: 2px solid $menuBorder;
+
+    position: fixed;
+    width: $menuWidth;
+    max-width: 98%;
+    height: 100%;
+    top: 0;
+    left: -$menuWidth;
+    padding: 20px 10px;
+    z-index: 100;
+
+    h2 {
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        text-decoration: underline;
+        
+        padding-bottom: 15px;
+    }
+
+    h6 {
+        font-size: 15px;
+        margin: 15px 0 5px;
+    }
+
+    display: none;
+
+    .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;     
+    }
+}

@@ -1,0 +1,53 @@
+@import 'reset';
+@import 'variables';
+@import 'components';
+@import 'form';
+@import 'nodes';
+@import 'contextmenu';
+
+* {
+    box-sizing: border-box; 
+}
+
+html, body { 
+    background: $mainBackground;
+    font-family: verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: $mainTextColor; 
+    line-height: 17px;
+    padding-top: 20px;
+}
+
+#menu {
+    font-size: 14px;
+    text-transform: uppercase;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    .nav {
+        background: $menuBackground;
+        border: 1px solid $menuBorder;
+
+        margin-top: 5px;
+        margin-left: 10px;
+        display: none;
+    }
+
+    li {
+        cursor: pointer;
+        color: $menuItemTextColor;
+        padding: 5px 10px 7px 2px;
+
+        &:hover {
+            color: $menuItemHoverTextColor;
+        }
+    }
+
+    .icon {
+        font-size: 18px;
+        margin-right: 5px;
+    }
+}
