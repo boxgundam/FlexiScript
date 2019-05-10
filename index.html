@@ -11,112 +11,108 @@
   <!-- Place favicon.ico in the root directory -->
 
   <link rel="stylesheet" type="text/css"href="vendor/jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+  <link rel="stylesheet" href="vendor/jexcel/css/jquery.jexcel.css">
   <link rel="stylesheet" href="css/main.css">
+
 
   <meta name="theme-color" content="#111111">
 </head>
 
 <body>
+    <button id="menu_toggle" class="btn menu-toggle">&equiv;</button>
     <nav id="menu">
-        <button class="btn menu-toggle">&equiv;</button>
         <ul class="nav">
-            <li data-panel="characters"><span class="icon">&#128106;</span>Characters</li>
-            <li data-panel="load"><span class="icon">&#128229;</span>Load</li>
-            <li data-panel="save"><span class="icon">&#128190;</span>Save</li>
-            <li data-panel="export"><span class="icon">&#128228;</span>Export</li>
+            <li data-nav="new_project">
+                <button type="button"><span class="icon">&#10024; </span>New Project</button>
+                <div class="menu-panel">
+                    <form>
+                        <input class="input" type="text" name="title" placeholder="Title" />
+                        <button class="btn" type="submit">Create</button>
+                    </form>
+                </div>
+            </li>
+            <li data-nav="autosaves">
+                <button type="button"><span class="icon">&#128229;</span>Load Project</button>
+                <div class="menu-panel">
+                    <ul id="autosaves"></ul>
+                </div>
+            </li>
+            <li data-nav="import">
+                <button type="button"><span class="icon">&#128229;</span>Import Files</button>
+                <div class="menu-panel">
+                    <form>
+                        <input class="input" type="file" name="import_files" accept=".csv" multiple />
+                        <button class="btn" type="submit">Import</button>
+                    </form>
+                </div>
+            </li>
+            <li data-nav="add_sheet">
+                <button type="button"><span class="icon">&#128240;</span>Add Scriptsheet</button>
+                <div class="menu-panel">
+                    <form>
+                        <input class="input" type="text" name="name" placeholder="Name" />
+                        <button class="btn" type="submit">Add</button>
+                    </form>
+                </div>
+            </li>
+            <li data-nav="export_csv">
+                <button type="button"><span class="icon">&#128228;</span>Export as CSV</button>
+                <div class="menu-panel">
+                    <form>
+                        <div class="input">
+                            <input type="checkbox" name="combine" /> Combine script files
+                        </div>
+                        <button class="btn" type="submit">Download</button>
+                    </form>
+                </div>
+            </li>
+            <li data-nav="export_renpy">
+                <button type="button"><span class="icon">&#128228;</span>Export for Ren'Py</button>
+                <div class="menu-panel">
+                    <form>
+                        <div class="input">
+                            <input type="checkbox" name="combine" /> Combine script files
+                        </div>
+                        <button class="btn" type="submit">Download</button>
+                    </form>
+                </div>
+            </li>
+            <!-- <li data-panel="save"><span class="icon">&#128190;</span>Save</li> -->
         </ul>
     </nav>
-    
-    <ul id="diagram"></ul>
 
-    <!-- Side Panels -->
-    <div id="panel-characters" class="panel">
-        <button class="btn btn-close">&times;</button>
-        <h2>Characters</h2>
+    <div id="content">
+        <h1 id="title">FlexiScript | <span></span></h1>
+        <div id="tabs">
+            <ul></ul>
+        </div>
     </div>
-
-    <div id="panel-load" class="panel">
-        <button class="btn btn-close">&times;</button>
-        <h2>Load</h2>
-        <form id="form-load-file">
-            <fieldset>
-                <h6>Load Autosave:</h6>
-                <!-- Dynamically Load list of saves -->
-                <div id="autosaves"></div>
-
-                <h6>Import from disk:</h6>
-                <input type="file" name="file" accept=".flexiscript" class="input ui-widget-content ui-corner-all" />
-
-                <h6>Create New Project:</h6>
-                <input type="text" name="title" placeholder="Title" class="input ui-widget-content ui-corner-all" />
-                <button type="button" name="load_new">Create</button>
-            </fieldset>
-        </form>
-    </div>
-
-    <div id="panel-save" class="panel">
-        <button class="btn btn-close">&times;</button>
-        <h2>Save</h2>
-    </div>
-    
-    <div id="panel-export" class="panel">
-        <button class="btn btn-close">&times;</button>
-        <h2>Export</h2>
-    </div>
-
-    <!-- Context Menu -->
-    <ul id="contextmenu" style="display:none">
-        <li data-menuitem="edit">Edit</li>
-        <li data-menuitem="new">Add New..</li>
-        <li data-menuitem="move">Move</li>
-        <li data-menuitem="delete">Delete</li>
-    </ul>
-
-    <!-- Dialogs -->
-    <div id="dialog-edit-node" style="display:none">
+<!-- 
+    <div id="dialog" title="Tab data">
         <form>
-            <fieldset>
-                <label for="type">Type*</label>
-                <select name="type" class="input">
-                    <option value="narration">Narration</option>
-                    <option value="dialogue">Dialogue</option>
-                    <option value="choice">Choice</option>
-                </select>
-
-                <div class="select-character">
-                    <label for="type">Character</label>
-                    <select name="type" class="input"></select>
-                </div>
-
-                <label for="text">Transition</label>
-                <input type="text" name="transition" class="input ui-widget-content ui-corner-all" />
-
-                <label for="text">Text</label>
-                <textarea name="text" class="input ui-widget-content ui-corner-all"></textarea>
-
-                <label for="text">Label</label>
-                <input type="text" name="label" class="input ui-widget-content ui-corner-all" />
-
+            <fieldset class="ui-helper-reset">
+            <label for="tab_title">Title</label>
+            <input type="text" name="tab_title" id="tab_title" value="Tab Title" class="ui-widget-content ui-corner-all">
+            <label for="tab_content">Content</label>
+            <textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all">Tab content</textarea>
             </fieldset>
         </form>
     </div>
-
-    <div id="dialog-delete-node" title="Delete Node" style="display:none">
-        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
-    </div>
-    
-    
+             -->
     <!-- Scripts -->
     <script src="vendor/modernizr-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="vendor/jquery-3.4.0.min.js"><\/script>')</script>
-    <script src="vendor/jquery.color-2.1.2.min.js"></script>
     <script src="vendor/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="vendor/jexcel/js/jquery.jexcel.js"></script>
+    <script src="vendor/jszip.min.js"></script>
 
-    <script src="js/main.js"></script>
-    <script src="js/statemanager.js"></script>
-    <script src="js/panel.js"></script>
-    <script src="js/dialog.js"></script>
+    <script src="js/Spreadsheet.js"></script>
+    <script src="js/CSV.js"></script>
+    <script src="js/RenPy.js"></script>
+    <script src="js/Forms.js"></script>
+    <script src="js/Storage.js"></script>
+    <script src="js/App.js"></script>
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-139455747-1', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
