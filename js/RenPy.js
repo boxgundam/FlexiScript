@@ -26,6 +26,7 @@ function ArrayToRenPyCharacters(dataArray, delimiter = ',', includeHeaders = tru
 function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
     let s = SpreadsheetScriptKeys;
     let stringData = '';
+    let menuOptionDepth = null;
     let tabDepth = 0;
     let characterVars = {};
 
@@ -46,6 +47,15 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
             stringData += `label ${row[s.Label]}:\n`;
             tabDepth = 1;
             continue;
+        }
+
+        //Prepend
+        if(row[s.Prepend].length) {
+            let lines = row[s.Prepend].split('\n');
+
+            for(let l in lines)
+                if(lines[l].length)
+                    stringData += `${'\t'.repeat(tabDepth)}${lines[l]}\n`;
         }
 
         // Scenes
@@ -71,7 +81,37 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
                     stringData += `${'\t'.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[l]}"\n`;
         }
 
-        
+        //Choice
+        if(row[s.Choice].length) {
+            stringData += `${'\t'.repeat(tabDepth)}menu ${row[s.Choice]}:\n`;
+            tabDepth++; 
+            menuOptionDepth = tabDepth;
+        }
+
+        //Option
+        if(row[s.Option].length) {
+            if(row[s.Choice].length) {
+                stringData += `${'\t'.repeat(menuOptionDepth)}"${row[s.Option]}"\n`;
+            } else {
+                stringData += `${'\t'.repeat(menuOptionDepth)}"${row[s.Option]}":\n`;
+                tabDepth = menuOptionDepth + 1;
+            }
+        }
+
+        //Jump
+        if(row[s.Jump].length) {
+            
+            stringData += `${'\t'.repeat(tabDepth)}${row[s.Jump] != 'return' ? 'jump ': ''}${row[s.Jump]}\n`;
+        }
+
+        //Append
+        if(row[s.Append].length) {
+            let lines = row[s.Append].split('\n');
+
+            for(let l in lines)
+                if(lines[l].length)
+                    stringData += `${'\t'.repeat(tabDepth)}${lines[l]}\n`;
+        }
     }
 
     return stringData;

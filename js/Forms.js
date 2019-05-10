@@ -91,21 +91,20 @@ function Forms() {
                     zip.file(`${sheetName}.rpy`, ArrayToRenPyCharacters(data));
                     break;
                 case SpreadsheetType.Script:
-                    console.log(ArrayToRenPyScript(data));
-                    // if(combine) {
-                    //     combinedScript += ArrayToCSV(data);
-                    // } else {
-                    //     zip.file(`${sheetName}.csv`, combinedScript + ArrayToCSV(data));
-                    // }
+                    if(combine) {
+                        combinedScript += ArrayToRenPyScript(data);
+                    } else {
+                        zip.file(`${sheetName}.rpy`, combinedScript + ArrayToRenPyScript(data));
+                    }
                     break;
                 default:
                     alert('Invalid spreadsheet type');
             }
         });
 
-        // if(combine)
-        //     zip.file('script.csv', combinedScript);
+        if(combine)
+            zip.file('script.rpy', combinedScript);
 
-        // downloadZip(zip, `${ProjectTitle} RenPy`);
+        downloadZip(zip, `${ProjectTitle} RenPy`);
     });
 }

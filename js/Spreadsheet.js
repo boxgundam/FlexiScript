@@ -64,8 +64,6 @@ function loadSpreadsheet(element, type, data = []) {
                                 name: name
                             });
                     }
-                    // console.log(SpreadsheetCharacters)
-  
                 },
                 onchange: function(obj, cel, val) {
                     autosave();
