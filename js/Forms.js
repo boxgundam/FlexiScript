@@ -91,10 +91,18 @@ function Forms() {
 
             switch($(this).data('fstype')) {
                 case SpreadsheetType.Variables:
-                    zip.file(`${sheetName}.rpy`, ArrayToRenPyVariables(data));
+                    if(combine) {
+                        combinedScript += ArrayToRenPyVariables(data) + '\n';
+                    } else {
+                        zip.file(`${sheetName}.rpy`, ArrayToRenPyVariables(data));
+                    }
                     break;
                 case SpreadsheetType.Characters:
-                    zip.file(`${sheetName}.rpy`, ArrayToRenPyCharacters(data));
+                    if(combine) {
+                        combinedScript += ArrayToRenPyCharacters(data) + '\n';
+                    } else {
+                        zip.file(`${sheetName}.rpy`, ArrayToRenPyCharacters(data));
+                    }
                     break;
                 case SpreadsheetType.Script:
                     if(combine) {

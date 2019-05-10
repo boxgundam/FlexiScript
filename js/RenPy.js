@@ -7,7 +7,14 @@ function ArrayToRenPyVariables(dataArray, delimiter = ',', includeHeaders = true
         let row = dataArray[i];
         if(row[0].length) {
             // Character definition
-            stringData += `default ${row[v.Name]} = ${row[v.Default_Value] ? row[v.Default_Value] : 'null'}\n`;
+            switch(row[v.Type]) {
+                case 'string':
+                    stringData += `default ${row[v.Name]} = "${row[v.Default_Value] ? row[v.Default_Value] : ''}"\n`;
+                    break;
+                default:
+                    stringData += `default ${row[v.Name]} = ${row[v.Default_Value] ? row[v.Default_Value] : 'None'}\n`;
+            }
+            
         }
     }
 

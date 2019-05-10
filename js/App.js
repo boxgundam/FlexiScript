@@ -7,14 +7,16 @@ const SpreadsheetType = {
 
 const SpreadsheetVariablesKeys = {
     Name: 0,
-    Default_Value: 1
+    Type: 1,
+    Default_Value: 2
 };
 
 const SpreadsheetCharactersKeys = {
     Name: 0,
     Variable: 1,
     Text_Color: 2,
-    Icon: 3
+    Icon: 3,
+    Notes: 4
 };
 
 const SpreadsheetScriptKeys = {
