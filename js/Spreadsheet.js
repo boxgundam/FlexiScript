@@ -47,7 +47,7 @@ function loadSpreadsheet(element, type, data = []) {
                 colWidths: [ 250, 100, 400 ],
                 columns: [
                     { type: 'text' },
-                    { type: 'dropdown', source: [{ id: 'string', name: 'string' }, { id: 'number', name: 'number' }, { id: 'boolean', name: 'boolean' }, { id: 'expression', name: 'expression' }] },
+                    { type: 'dropdown', source: SpreadsheetVariableTypes.map(v => { return { id: v, name: v } }) },
                     { type: 'text' }
                 ],
                 csvHeaders:true,
