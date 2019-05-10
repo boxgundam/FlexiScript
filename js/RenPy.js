@@ -1,6 +1,21 @@
 
+function ArrayToRenPyVariables(dataArray, delimiter = ',', includeHeaders = true) {
+    const v = SpreadsheetVariablesKeys;
+    let stringData = '';
+    
+    for(let i = 0; i < dataArray.length; i++) {
+        let row = dataArray[i];
+        if(row[0].length) {
+            // Character definition
+            stringData += `default ${row[v.Name]} = ${row[v.Default_Value] ? row[v.Default_Value] : 'null'}\n`;
+        }
+    }
+
+    return stringData;
+}
+
 function ArrayToRenPyCharacters(dataArray, delimiter = ',', includeHeaders = true) {
-    let c = SpreadsheetCharactersKeys;
+    const c = SpreadsheetCharactersKeys;
     let stringData = '';
     
     for(let i = 0; i < dataArray.length; i++) {
@@ -24,7 +39,9 @@ function ArrayToRenPyCharacters(dataArray, delimiter = ',', includeHeaders = tru
 }
 
 function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
-    let s = SpreadsheetScriptKeys;
+    const renpyTab = '    '; // Four spaces
+    const s = SpreadsheetScriptKeys;
+
     let stringData = '';
     let menuOptionDepth = null;
     let tabDepth = 0;
@@ -55,12 +72,12 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
 
             for(let l in lines)
                 if(lines[l].length)
-                    stringData += `${'\t'.repeat(tabDepth)}${lines[l]}\n`;
+                    stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n`;
         }
 
         // Scenes
         if(row[s.Scene].length) {
-            stringData += `${'\t'.repeat(tabDepth)}scene ${row[s.Scene]}\n`;
+            stringData += `${renpyTab.repeat(tabDepth)}scene ${row[s.Scene]}\n`;
         }
 
         // Narrative
@@ -69,7 +86,7 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
 
             for(let l in lines)
                 if(lines[l].length)
-                    stringData += `${'\t'.repeat(tabDepth)}"${lines[l]}"\n`;
+                    stringData += `${renpyTab.repeat(tabDepth)}"${lines[l]}"\n`;
         }
 
         //Dialogue
@@ -78,12 +95,12 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
 
             for(let l in lines)
                 if(lines[l].length)
-                    stringData += `${'\t'.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[l]}"\n`;
+                    stringData += `${renpyTab.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[l]}"\n`;
         }
 
         //Choice
         if(row[s.Choice].length) {
-            stringData += `${'\t'.repeat(tabDepth)}menu ${row[s.Choice]}:\n`;
+            stringData += `${renpyTab.repeat(tabDepth)}menu ${row[s.Choice]}:\n`;
             tabDepth++; 
             menuOptionDepth = tabDepth;
         }
@@ -91,9 +108,9 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
         //Option
         if(row[s.Option].length) {
             if(row[s.Choice].length) {
-                stringData += `${'\t'.repeat(menuOptionDepth)}"${row[s.Option]}"\n`;
+                stringData += `${renpyTab.repeat(menuOptionDepth)}"${row[s.Option]}"\n`;
             } else {
-                stringData += `${'\t'.repeat(menuOptionDepth)}"${row[s.Option]}":\n`;
+                stringData += `${renpyTab.repeat(menuOptionDepth)}"${row[s.Option]}":\n`;
                 tabDepth = menuOptionDepth + 1;
             }
         }
@@ -101,7 +118,7 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
         //Jump
         if(row[s.Jump].length) {
             
-            stringData += `${'\t'.repeat(tabDepth)}${row[s.Jump] != 'return' ? 'jump ': ''}${row[s.Jump]}\n`;
+            stringData += `${renpyTab.repeat(tabDepth)}${row[s.Jump] != 'return' ? 'jump ': ''}${row[s.Jump]}\n`;
         }
 
         //Append
@@ -110,7 +127,7 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
 
             for(let l in lines)
                 if(lines[l].length)
-                    stringData += `${'\t'.repeat(tabDepth)}${lines[l]}\n`;
+                    stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n`;
         }
     }
 

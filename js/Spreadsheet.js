@@ -22,8 +22,11 @@ function newSpreadsheet(name, type, isStatic = false) {
     SpreadsheetTabs.tabs('refresh');
 
     switch(type) {
+        case SpreadsheetType.Variables:
+            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Variables, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 2, rows: 20 }));   
+            break;
         case SpreadsheetType.Characters:
-            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Characters, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 4, rows: 10 }));   
+            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Characters, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 4, rows: 20 }));   
             break;
         case SpreadsheetType.Script:
             loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Script, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 11, rows: 100 }));
@@ -37,6 +40,31 @@ function newSpreadsheet(name, type, isStatic = false) {
 
 function loadSpreadsheet(element, type, data = []) {
     switch(type) {
+        case SpreadsheetType.Variables:
+            element.jexcel({
+                data: data,  
+                colHeaders: SpreadsheetVariablesHeaders,
+                colWidths: [ 250, 400 ],
+                columns: [
+                    { type: 'text' },
+                    { type: 'text' }
+                ],
+                csvHeaders:true,
+                tableOverflow:true,
+                tableHeight: 600,
+                onchange: function(obj, cel, val) {
+                    autosave();
+                }
+            });
+
+            element.jexcel('updateSettings', {
+                table: function (instance, cell, col, row, val, id) {
+                    if (col == 0) {
+                        $(cell).css('text-align', 'left');
+                    }
+                }
+            });
+            break;
         case SpreadsheetType.Characters:
             element.jexcel({
                 data: data,  
