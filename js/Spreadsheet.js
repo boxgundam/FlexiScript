@@ -23,13 +23,13 @@ function newSpreadsheet(name, type, isStatic = false) {
 
     switch(type) {
         case SpreadsheetType.Variables:
-            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Variables, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 2, rows: 20 }));   
+            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Variables, $.fn.jexcel('helper', { action: 'createEmptyData', cols: SpreadsheetVariablesHeaders.length, rows: 20 }));   
             break;
         case SpreadsheetType.Characters:
-            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Characters, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 4, rows: 20 }));   
+            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Characters, $.fn.jexcel('helper', { action: 'createEmptyData', cols: SpreadsheetCharactersHeaders.length, rows: 20 }));   
             break;
         case SpreadsheetType.Script:
-            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Script, $.fn.jexcel('helper', { action: 'createEmptyData', cols: 11, rows: 100 }));
+            loadSpreadsheet($(`#${spreadsheetId}`), SpreadsheetType.Script, $.fn.jexcel('helper', { action: 'createEmptyData', cols: SpreadsheetScriptHeaders.length, rows: 100 }));
             break;
         default:
             alert('Failed to add sheet');
@@ -44,9 +44,10 @@ function loadSpreadsheet(element, type, data = []) {
             element.jexcel({
                 data: data,  
                 colHeaders: SpreadsheetVariablesHeaders,
-                colWidths: [ 250, 400 ],
+                colWidths: [ 250, 100, 400 ],
                 columns: [
                     { type: 'text' },
+                    { type: 'dropdown', source: [{ id: 'string', name: 'string' }, { id: 'number', name: 'number' }, { id: 'boolean', name: 'boolean' }] },
                     { type: 'text' }
                 ],
                 csvHeaders:true,
@@ -59,7 +60,7 @@ function loadSpreadsheet(element, type, data = []) {
 
             element.jexcel('updateSettings', {
                 table: function (instance, cell, col, row, val, id) {
-                    if (col == 0) {
+                    if (col == 0 || col == 2) {
                         $(cell).css('text-align', 'left');
                     }
                 }
@@ -69,7 +70,7 @@ function loadSpreadsheet(element, type, data = []) {
             element.jexcel({
                 data: data,  
                 colHeaders: SpreadsheetCharactersHeaders,
-                colWidths: [ 160, 80, 90, 100 ],
+                colWidths: [ 160, 80, 90, 100, 500 ],
                 columns: [
                     { type: 'text' },
                     { type: 'text' },
@@ -113,7 +114,7 @@ function loadSpreadsheet(element, type, data = []) {
 
             element.jexcel('updateSettings', {
                 table: function (instance, cell, col, row, val, id) {
-                    if (col == 0) {
+                    if (col == 0 || col == 4) {
                         $(cell).css('text-align', 'left');
                     }
                 }
