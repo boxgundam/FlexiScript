@@ -24,10 +24,10 @@ function ArrayToRenPyVariables(dataArray, delimiter = ',', includeHeaders = true
 function ArrayToRenPyCharacters(dataArray, delimiter = ',', includeHeaders = true) {
     const c = SpreadsheetCharactersKeys;
     let stringData = '';
-    
+
     for(let i = 0; i < dataArray.length; i++) {
         let row = dataArray[i];
-        if(row[0].length) {
+        if(row[0].length || row[1].length) {
             // Character definition
             stringData += `define ${row[c.Variable] || row[c.Name]} = Character("${row[c.Name]}"` +
 
@@ -91,18 +91,37 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
         if(row[s.Narrative].length) {
             let lines = row[s.Narrative].split('\n');
 
-            for(let l in lines)
-                if(lines[l].length)
-                    stringData += `${renpyTab.repeat(tabDepth)}"${lines[l]}"\n`;
+            if(lines.length > 1) {
+                // Multi-line
+                stringData += `${renpyTab.repeat(tabDepth)}"""\n`;
+
+                for(let l in lines)
+                    if(lines[l].length)
+                        stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n${l < lines.length - 1 ? '\n' :''}`;
+
+                stringData += `${renpyTab.repeat(tabDepth)}"""\n`;
+            } else {
+                stringData += `${renpyTab.repeat(tabDepth)}"${lines[0]}"\n`;
+            }
         }
 
         //Dialogue
         if(row[s.Dialogue].length) {
             let lines = row[s.Dialogue].split('\n');
 
-            for(let l in lines)
-                if(lines[l].length)
-                    stringData += `${renpyTab.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[l]}"\n`;
+            if(lines.length > 1) {
+                // Multi-line
+                stringData += `${renpyTab.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"""\n`;
+
+                for(let l in lines)
+                    if(lines[l].length)
+                        stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n${l < lines.length - 1 ? '\n' :''}`;
+                        
+                stringData += `${renpyTab.repeat(tabDepth)}"""\n`;
+            } else {
+                stringData += `${renpyTab.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[0]}"\n`;
+            }
+                    
         }
 
         //Choice
@@ -137,6 +156,5 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
                     stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n`;
         }
     }
-
     return stringData;
 }
