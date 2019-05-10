@@ -37,6 +37,8 @@ const SpreadsheetVariablesHeaders = Object.keys(SpreadsheetVariablesKeys);
 const SpreadsheetCharactersHeaders = Object.keys(SpreadsheetCharactersKeys);
 const SpreadsheetScriptHeaders = Object.keys(SpreadsheetScriptKeys);
 
+const SpreadsheetVariableTypes = ['string', 'number', 'boolean', 'expression'];
+
 let SpreadsheetTabs;
 
 let SpreadsheetCharacters = [];
