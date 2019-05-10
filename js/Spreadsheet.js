@@ -87,10 +87,10 @@ function loadSpreadsheet(element, type, data = []) {
                     for(let i = 0; i < data.length; i++) {
                         let name = data[i][0];
                         let variable = data[i][1];
-                        if(name.length)
+                        if(name.length || variable.length)
                             SpreadsheetCharacters.push({
                                 id: variable,
-                                name: name
+                                name: name.length ? name : `[${variable}]`
                             });
                     }
                 },

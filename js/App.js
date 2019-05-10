@@ -167,11 +167,6 @@ function getOrderedSpreadsheets() {
     return spreadsheets;
 }
 
-/* 
-function getCharacterByName(name) {
-    return SpreadsheetCharacters.find(c => c.name == name);
-} */
-
 function downloadZip(zip, title) {
     zip.generateAsync({ type: 'blob' })
         .then(function(content) {
@@ -214,7 +209,7 @@ function newProject(title) {
     newSpreadsheet('characters', SpreadsheetType.Characters, true);
     let scriptSpreadsheet = newSpreadsheet('script', SpreadsheetType.Script, true);
         scriptSpreadsheet.jexcel('setValue', 'B1', 'start');
-    SpreadsheetTabs.tabs('option', 'active', 1);
+    SpreadsheetTabs.tabs('option', 'active', 2);
     autosave();
 }
 
@@ -234,7 +229,7 @@ function loadProject(saveData) {
 
         let spreadsheetElement = newSpreadsheet(spreadsheet.name, spreadsheet.type, spreadsheet.name == 'characters' || spreadsheet.name == 'script');
         spreadsheetElement.jexcel('setData', spreadsheet.data, false);
-        SpreadsheetTabs.tabs('option', 'active', 1);
+        SpreadsheetTabs.tabs('option', 'active', 2);
     }
     autosave();
 }
