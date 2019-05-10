@@ -2,6 +2,7 @@
 $mainBackground: #111;
 $mainTextColor: #eee;
 
+$buttonBorder: #eee;
 $buttonBackground: #111;
 $buttonTextColor: #eee;
 $buttonHoverTextColor: lightskyblue;
@@ -9,12 +10,15 @@ $buttonHoverTextColor: lightskyblue;
 $menuBackground: #111;
 $menuBorder: rgba(#444, 0.8);
 $menuItemTextColor: $mainTextColor;
+$menuItemHoverBackground: rgba(#222, 0.7);
 $menuItemHoverTextColor: lightskyblue;
 
-$contextmenuBorder: #777;
-$contextmenuBackground: #e3e3e3;
+$overlayBackground: #000;
 
-$contextmenuItemHoverBorder: #999;
-$contextmenuItemHoverBackground: #d8d8d8;
+// $contextmenuBorder: #777;
+// $contextmenuBackground: #e3e3e3;
+
+// $contextmenuItemHoverBorder: #999;
+// $contextmenuItemHoverBackground: #d8d8d8;
 
 // $nodeChoiceBackground: salmon;

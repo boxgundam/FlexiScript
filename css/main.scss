@@ -1,9 +1,8 @@
 @import 'reset';
 @import 'variables';
-@import 'components';
-@import 'form';
-@import 'nodes';
-@import 'contextmenu';
+
+$menuWidth: 25%;
+$menuOpencontentWidth: 75%;
 
 * {
     box-sizing: border-box; 
@@ -11,43 +10,207 @@
 
 html, body { 
     background: $mainBackground;
-    font-family: verdana, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: $mainTextColor; 
-    line-height: 17px;
-    padding-top: 20px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: $mainTextColor;
+
+    width: 100%;
+    height: 100%;
 }
 
-#menu {
-    font-size: 14px;
-    text-transform: uppercase;
-
+#menu_toggle {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1100;
+}
+
+#menu {
+    background: $menuBackground;
+
+    position: fixed;
+    width: $menuWidth;
+    height: 100%;
+    top: 0;
+    left: -$menuWidth;
     z-index: 1000;
 
+    transition: left 300ms ease-in;
+
     .nav {
-        background: $menuBackground;
-        border: 1px solid $menuBorder;
+        border-right: 1px solid $menuBorder;
 
-        margin-top: 5px;
-        margin-left: 10px;
-        display: none;
+        height: 100%;
+        padding: 35px 0;
+        margin-right: 5px;
     }
-
+    
     li {
-        cursor: pointer;
-        color: $menuItemTextColor;
-        padding: 5px 10px 7px 2px;
+        border-bottom: 1px solid $menuBorder;
 
-        &:hover {
-            color: $menuItemHoverTextColor;
+        &:first-child {
+            border-top: 1px solid $menuBorder;
+        }
+ 
+        button[type="button"] {
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: $menuItemTextColor;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 7px 10px 9px;
+
+            width: 100%;
+
+            &:hover {
+                background: $menuItemHoverBackground;
+                color: $menuItemHoverTextColor;
+            }
+                
+            .icon {
+                font-size: 19px;
+                margin-right: 10px;
+            }
+        }
+
+        .menu-panel {
+            padding: 12px 20px 19px;
+            display: none;
         }
     }
 
-    .icon {
-        font-size: 18px;
-        margin-right: 5px;
+    &.open {
+        left: 0;
     }
 }
+
+#content {
+    position: absolute;
+    width: 100%;
+    padding-top: 35px;
+    left: 0;
+
+    transition: left 300ms ease-in, width 300ms ease-in;
+
+    &.menu-open {
+        width: $menuOpencontentWidth;
+        left: $menuWidth;
+
+        #title {
+            left: 0;
+        }
+    }
+}
+
+#title {
+    font-size: 19px;
+    font-weight: 600;
+    // text-transform: uppercase;
+
+    position: absolute;
+    top: 8px;
+    left: 40px;
+
+    transition: left 300ms ease-in;
+}
+
+#tabs {
+    > .ui-tabs-panel {
+        overflow: auto;
+    }
+    
+    li .ui-icon-close { 
+        cursor: pointer; 
+
+        margin: 0.4em 0.2em 0 0; 
+        float: left; 
+    }
+}
+
+.ui-tabs .ui-tabs-nav {
+    font-size: 10px;
+    text-transform: uppercase;
+
+    li.ui-tabs-active .ui-tabs-anchor {
+        cursor: default;
+    }
+}
+
+.ui-widget-overlay.ui-front {
+    background: $overlayBackground;
+}
+
+.jexcel {
+    color: #111;
+}
+
+.input { 
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.btn {
+    cursor: pointer;
+    background: $buttonBackground;
+    border: 1px solid $buttonBorder;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 12px;
+    color: $buttonTextColor;
+    text-align: center;
+    text-transform: uppercase;
+
+    padding: 7px 10px;
+    display: block;
+
+    &:hover {
+        color: $buttonHoverTextColor;
+    }
+}
+
+.btn.menu-toggle {
+    border: none;
+    font-size: 20px;
+    padding: 3px 10px;
+}
+
+.autosave {
+    cursor: pointer;
+
+    padding: 7px 10px 9px;
+    overflow: hidden;
+
+    &:hover {
+        background: $menuItemHoverBackground;
+        color: $menuItemHoverTextColor;
+    }
+
+    .autosave-delete {
+        color: rgb(146, 13, 13);
+        float: right;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
+
+// // .dialog { 
+//     display: none;
+
+//     label, input { 
+//         display:block; 
+//     }
+
+//     label { 
+//         margin-top: 0.5em; 
+//     }
+//     input, textarea { 
+//         width: 95%; 
+//     }
+// }
