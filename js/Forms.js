@@ -52,6 +52,9 @@ function Forms() {
             let sheetName = $(this).data('fsname');
 
             switch($(this).data('fstype')) {
+                case SpreadsheetType.Variables:
+                    zip.file(`${sheetName}.csv`, ArrayToCSV([SpreadsheetVariablesHeaders]) + ArrayToCSV(data));
+                    break;
                 case SpreadsheetType.Characters:
                     zip.file(`${sheetName}.csv`, ArrayToCSV([SpreadsheetCharactersHeaders]) + ArrayToCSV(data));
                     break;
@@ -87,6 +90,9 @@ function Forms() {
             let sheetName = $(this).data('fsname');
 
             switch($(this).data('fstype')) {
+                case SpreadsheetType.Variables:
+                    zip.file(`${sheetName}.rpy`, ArrayToRenPyVariables(data));
+                    break;
                 case SpreadsheetType.Characters:
                     zip.file(`${sheetName}.rpy`, ArrayToRenPyCharacters(data));
                     break;

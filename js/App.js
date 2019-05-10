@@ -1,7 +1,13 @@
 
 const SpreadsheetType = {
+    Variables: 'variables',
     Characters: 'characters',
     Script: 'script'
+};
+
+const SpreadsheetVariablesKeys = {
+    Name: 0,
+    Default_Value: 1
 };
 
 const SpreadsheetCharactersKeys = {
@@ -25,6 +31,7 @@ const SpreadsheetScriptKeys = {
     Append: 10
 };
 
+const SpreadsheetVariablesHeaders = Object.keys(SpreadsheetVariablesKeys);
 const SpreadsheetCharactersHeaders = Object.keys(SpreadsheetCharactersKeys);
 const SpreadsheetScriptHeaders = Object.keys(SpreadsheetScriptKeys);
 
@@ -199,6 +206,7 @@ function newProject(title) {
     });
         
     // Initialize default spreadsheets
+    newSpreadsheet('variables', SpreadsheetType.Variables, true);
     newSpreadsheet('characters', SpreadsheetType.Characters, true);
     let scriptSpreadsheet = newSpreadsheet('script', SpreadsheetType.Script, true);
         scriptSpreadsheet.jexcel('setValue', 'B1', 'start');
