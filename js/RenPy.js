@@ -99,9 +99,9 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
                     if(lines[l].length)
                         stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n${l < lines.length - 1 ? '\n' :''}`;
 
-                stringData += `${renpyTab.repeat(tabDepth)}"""\n`;
+                stringData += `${renpyTab.repeat(tabDepth)}"""${row[s.Condition].length ? ` ${row[s.Condition]}` : ''}\n`;
             } else {
-                stringData += `${renpyTab.repeat(tabDepth)}"${lines[0]}"\n`;
+                stringData += `${renpyTab.repeat(tabDepth)}"${lines[0]}"${row[s.Condition].length ? ` ${row[s.Condition]}` : ''}\n`;
             }
         }
 
@@ -117,9 +117,9 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
                     if(lines[l].length)
                         stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n${l < lines.length - 1 ? '\n' :''}`;
                         
-                stringData += `${renpyTab.repeat(tabDepth)}"""\n`;
+                stringData += `${renpyTab.repeat(tabDepth)}"""${row[s.Condition].length ? ` ${row[s.Condition]}` : ''}\n`;
             } else {
-                stringData += `${renpyTab.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[0]}"\n`;
+                stringData += `${renpyTab.repeat(tabDepth)}${row[s.Character] ? `${characterVars[row[s.Character]]} ` : ''}"${lines[0]}"${row[s.Condition].length ? ` ${row[s.Condition]}` : ''}\n`;
             }
                     
         }
@@ -156,5 +156,6 @@ function ArrayToRenPyScript(dataArray, delimiter = ',', includeHeaders = true) {
                     stringData += `${renpyTab.repeat(tabDepth)}${lines[l]}\n`;
         }
     }
+    
     return stringData;
 }
