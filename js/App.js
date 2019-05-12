@@ -128,7 +128,7 @@ jQuery(document).ready(function($) {
         loadProject(lastSession);
     }
 
-    toggleMenu();
+    // toggleMenu();
 });
 
 function toggleMenu() {
