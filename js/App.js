@@ -1,3 +1,7 @@
+const Format = {
+    CSV: 'csv',
+    Fountain: 'fountain'
+}
 
 const SpreadsheetType = {
     Variables: 'variables',
@@ -128,13 +132,20 @@ jQuery(document).ready(function($) {
         loadProject(lastSession);
     }
 
-    // toggleMenu();
+    // DEVELOPMENT ONLY: Open menu on page load
+    toggleMenu('import');
 });
 
-function toggleMenu() {
+function toggleMenu(togglePanel) {
     $('.menu-panel:visible').slideUp();
     $('#menu').toggleClass('open');
     $('#content').toggleClass('menu-open');
+
+    if(togglePanel) {
+        let panelButton = $(`#menu [data-nav="${togglePanel}"] > button`);
+        if(!panelButton.length) return;
+        panelButton[0].click();
+    }
 }
 
 function autosave() {
