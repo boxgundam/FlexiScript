@@ -1,8 +1,9 @@
 @import 'reset';
 @import 'variables';
-
-$menuWidth: 25%;
-$menuOpencontentWidth: 75%;
+@import 'menu';
+@import 'forms';
+@import 'jqueryui.extend';
+@import 'jexcel.extend';
 
 * {
     box-sizing: border-box; 
@@ -18,93 +19,6 @@ html, body {
     height: 100%;
 }
 
-#menu_toggle {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1100;
-}
-
-#menu {
-    background: $menuBackground;
-
-    position: fixed;
-    width: $menuWidth;
-    height: 100%;
-    top: 0;
-    left: -$menuWidth;
-    z-index: 1000;
-
-    transition: left 300ms ease-in;
-
-    .nav {
-        border-right: 1px solid $menuBorder;
-
-        height: 100%;
-        padding: 35px 0;
-        margin-right: 5px;
-    }
-    
-    li {
-        border-bottom: 1px solid $menuBorder;
-
-        &:first-child {
-            border-top: 1px solid $menuBorder;
-        }
- 
-        button[type="button"] {
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            color: $menuItemTextColor;
-            text-transform: uppercase;
-            text-align: left;
-            padding: 7px 10px 9px;
-
-            width: 100%;
-
-            &:hover {
-                background: $menuItemHoverBackground;
-                color: $menuItemHoverTextColor;
-            }
-                
-            .icon {
-                font-size: 19px;
-                margin-right: 10px;
-            }
-        }
-
-        .menu-panel {
-            padding: 12px 20px 19px;
-            display: none;
-        }
-    }
-
-    &.open {
-        left: 0;
-    }
-}
-
-#content {
-    position: absolute;
-    width: 100%;
-    padding-top: 35px;
-    left: 0;
-
-    transition: left 300ms ease-in, width 300ms ease-in;
-
-    &.menu-open {
-        width: $menuOpencontentWidth;
-        left: $menuWidth;
-
-        #title {
-            left: 0;
-        }
-    }
-}
-
 #title {
     font-size: 19px;
     font-weight: 600;
@@ -117,66 +31,22 @@ html, body {
     transition: left 300ms ease-in;
 }
 
-#tabs {
-    > .ui-tabs-panel {
-        overflow: auto;
-    }
-    
-    li .ui-icon-close { 
-        cursor: pointer; 
-
-        margin: 0.4em 0.2em 0 0; 
-        float: left; 
-    }
-}
-
-.ui-tabs .ui-tabs-nav {
-    font-size: 10px;
-    text-transform: uppercase;
-
-    li.ui-tabs-active .ui-tabs-anchor {
-        cursor: default;
-    }
-}
-
-.ui-widget-overlay.ui-front {
-    background: $overlayBackground;
-}
-
-.jexcel {
-    color: #111;
-}
-
-.input { 
+#content {
+    position: absolute;
     width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-    display: block;
-}
+    padding-top: 35px;
+    left: 0;
 
-.btn {
-    cursor: pointer;
-    background: $buttonBackground;
-    border: 1px solid $buttonBorder;
-    border-radius: 3px;
-    font-weight: 600;
-    font-size: 12px;
-    color: $buttonTextColor;
-    text-align: center;
-    text-transform: uppercase;
+    transition: left 300ms ease-in, width 300ms ease-in;
 
-    padding: 7px 10px;
-    display: block;
+    &.menu-open {
+        width: 100 - $menuWidth;
+        left: $menuWidth;
 
-    &:hover {
-        color: $buttonHoverTextColor;
+        #title {
+            left: 0;
+        }
     }
-}
-
-.btn.menu-toggle {
-    border: none;
-    font-size: 20px;
-    padding: 3px 10px;
 }
 
 .autosave {
@@ -197,15 +67,6 @@ html, body {
         &:hover {
             color: red;
         }
-    }
-}
-
-.jexcel {
-    td {
-        line-height: normal;
-    }
-    textarea.editor {
-        white-space: pre-wrap;
     }
 }
 

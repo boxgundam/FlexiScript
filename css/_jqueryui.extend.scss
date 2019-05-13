@@ -1,0 +1,27 @@
+// JqueryUI style overwrite
+
+#tabs {
+    > .ui-tabs-panel {
+        overflow: auto;
+    }
+    
+    li .ui-icon-close { 
+        cursor: pointer; 
+
+        margin: 0.4em 0.2em 0 0; 
+        float: left; 
+    }
+}
+
+.ui-tabs .ui-tabs-nav {
+    font-size: 10px;
+    text-transform: uppercase;
+
+    li.ui-tabs-active .ui-tabs-anchor {
+        cursor: default;
+    }
+}
+
+.ui-widget-overlay.ui-front {
+    background: $overlayBackground;
+}

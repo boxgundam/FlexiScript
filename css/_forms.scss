@@ -1,0 +1,46 @@
+form:not(:first-child) {
+    margin-top: 20px;
+}
+
+.label {
+    margin-bottom: 7px;
+    display: block;
+
+    &.label-header {
+        font-weight: 600;
+        text-decoration: underline;
+    }
+
+    &.label-info {
+        font-style: italic;
+    }
+}
+
+
+
+.input { 
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.btn {
+    cursor: pointer;
+    background: $buttonBackground;
+    border: 1px solid $buttonBorder;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 12px;
+    color: $buttonTextColor;
+    text-align: center;
+    text-transform: uppercase;
+
+    padding: 7px 10px;
+    display: block;
+
+    &:hover {
+        color: $buttonHoverTextColor;
+    }
+}
+
