@@ -42,7 +42,8 @@
                 <button type="button"><span class="icon">&#128229;</span>Import Files</button>
                 <div class="menu-panel">
                     <form>
-                        <input class="input" type="file" name="import_files" accept=".csv" multiple />
+                        <label class="label label-info">Import CSV or Fountain files</label>
+                        <input class="input" type="file" name="import_files" accept=".csv, .fountain" multiple />
                         <button class="btn" type="submit">Import</button>
                     </form>
                 </div>
@@ -58,6 +59,17 @@
             </li>
             <li data-nav="export_csv">
                 <button type="button"><span class="icon">&#128228;</span>Export as CSV</button>
+                <div class="menu-panel">
+                    <form>
+                        <div class="input">
+                            <input type="checkbox" name="combine" /> Combine script files
+                        </div>
+                        <button class="btn" type="submit">Download</button>
+                    </form>
+                </div>
+            </li>
+            <li data-nav="export_fountain">
+                <button type="button"><span class="icon">&#128228;</span>Export as Fountain Script</button>
                 <div class="menu-panel">
                     <form>
                         <div class="input">
@@ -112,6 +124,7 @@
     <script src="js/Spreadsheet.js"></script>
     <script src="js/CSV.js"></script>
     <script src="js/RenPy.js"></script>
+    <script src="js/Fountain.js"></script>
     <script src="js/Forms.js"></script>
     <script src="js/Storage.js"></script>
     <script src="js/App.js"></script>

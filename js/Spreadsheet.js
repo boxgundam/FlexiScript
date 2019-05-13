@@ -176,6 +176,56 @@ function loadSpreadsheet(element, type, data = []) {
     }
 }
 
+function importFileToSpreadsheet(file) {
+    let fileNameParts = file.name.toLowerCase().split('.');
+    let format = fileNameParts.pop();
+    let filename = fileNameParts.join();
+    let importCallback = null;
+
+    switch(format) {
+        case Format.CSV:
+            filename = filename.replace('.csv', '');
+            importCallback = CSVToArray;
+            break;
+        case Format.Fountain:
+            filename = filename.replace('.fountain', '');
+            importCallback = FoutainToArray;
+            break;
+        default:
+            alert('Invalid import format.');
+            return;
+    }
+
+    let elementId = `${filename}_spreadsheet`;
+    let reader = new FileReader();
+
+    reader.onload = function(e) {
+        let content = e.target.result;
+
+        if(!content) {
+            alert('Failed to load data');
+            return false;
+        }
+
+        let importData = importCallback(content);
+        let spreadsheetElement = $(`#${elementId}`);
+
+        if(spreadsheetElement.length) {
+            if(!confirm(`A tab already exists with the name:\n\n${filename}\n\Overwrite the existing data?`))
+                return;
+            else
+                spreadsheetElement.jexcel('setData', importData.data, false);
+                autosave();
+        } else {
+            let spreadsheetElement = newSpreadsheet(filename, SpreadsheetType.Script);
+            spreadsheetElement.jexcel('setData', importData.data, false);
+            autosave();
+        }
+    };
+
+    reader.readAsText(file);
+}
+
 function updateSpreadsheetDropdown(dropdownArray, activeSpreadsheetCell) {
     let index = dropdownArray.indexOf(activeSpreadsheetCell);
 
