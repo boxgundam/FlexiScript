@@ -1,35 +1,3 @@
-function importCSV(file) {
-    let filename = file.name.replace('.csv', '').toLowerCase();
-    let elementId = `${filename}_spreadsheet`;
-    let reader = new FileReader();
-
-    reader.onload = function(e) {
-        let content = e.target.result;
-
-        if(!content) {
-            alert('Failed to load data');
-            return false;
-        }
-
-        let csvData = CSVToArray(content);
-        let spreadsheetElement = $(`#${elementId}`);
-
-        if(spreadsheetElement.length) {
-            if(!confirm(`A tab already exists with the name:\n\n${filename}\n\Overwrite the existing data?`))
-                return;
-            else
-                spreadsheetElement.jexcel('setData', csvData.data, false);
-                autosave();
-        } else {
-            let spreadsheetElement = newSpreadsheet(filename, SpreadsheetType.Script);
-            spreadsheetElement.jexcel('setData', csvData.data, false);
-            autosave();
-        }
-    };
-
-    reader.readAsText(file);
-}
-
 function CSVToArray(csvString, delimiter = ',', separateHeaders = true) {
     // Create a regular expression to parse the CSV values.
     let csvPattern = new RegExp((

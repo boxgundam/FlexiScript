@@ -25,7 +25,7 @@ function Forms() {
         if(!files) return;
 
         for(let i = 0; i < files.length; i++) {
-            importCSV(files[i]);
+            importFileToSpreadsheet(files[i]);
         }
     });
 
@@ -39,7 +39,7 @@ function Forms() {
         nameField.val('');
     });
 
-    // Export for CSV
+    // Export as CSV
     $('[data-nav="export_csv"] form').on('submit', function(e) {
         event.preventDefault();
         let combineField = $(this).find('[name="combine"]');
@@ -75,6 +75,47 @@ function Forms() {
             zip.file('script.csv', combinedScript);
 
         downloadZip(zip, `${ProjectTitle} CSV`);
+    });
+
+    // Export as Fountain
+    $('[data-nav="export_fountain"] form').on('submit', function(e) {
+        event.preventDefault();
+        let combineField = $(this).find('[name="combine"]');
+        let combine = combineField[0].checked;
+        let combinedScript = ArrayToFoutain();
+
+        let zip = new JSZip();
+        $.each(getOrderedSpreadsheets(), function() {
+            let data = $(this).jexcel('getData');
+            let sheetName = $(this).data('fsname');
+            console.log(sheetName)
+
+            // ArrayToFoutain()
+
+            // switch($(this).data('fstype')) {
+            //     case SpreadsheetType.Variables:
+            //         zip.file(`${sheetName}.csv`, ArrayToCSV([SpreadsheetVariablesHeaders]) + ArrayToCSV(data));
+            //         break;
+            //     case SpreadsheetType.Characters:
+            //         zip.file(`${sheetName}.csv`, ArrayToCSV([SpreadsheetCharactersHeaders]) + ArrayToCSV(data));
+            //         break;
+            //     case SpreadsheetType.Script:
+            //         if(combine) {
+            //             combinedScript += ArrayToCSV(data);
+            //         } else {
+            //             zip.file(`${sheetName}.csv`, combinedScript + ArrayToCSV(data));
+            //         }
+                    
+            //         break;
+            //     default:
+            //         alert('Invalid spreadsheet type');
+            // }
+        });
+
+        // if(combine)
+        //     zip.file('script.csv', combinedScript);
+
+        // downloadZip(zip, `${ProjectTitle} CSV`);
     });
 
     // Export for Ren'Py
