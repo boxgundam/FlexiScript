@@ -1,0 +1,12 @@
+// jExcel style overwrite
+
+.jexcel {
+    color: #111;
+
+    td {
+        line-height: normal;
+    }
+    textarea.editor {
+        white-space: pre-wrap;
+    }
+}
