@@ -39,7 +39,7 @@
                 </div>
             </li>
             <li data-nav="import">
-                <button type="button"><span class="icon">&#128229;</span>Import Files</button>
+                <button type="button"><span class="icon">&#128194;</span>Import Files</button>
                 <div class="menu-panel">
                     <form>
                         <label class="label label-info">Import CSV or Fountain files</label>
@@ -87,6 +87,40 @@
                             <input type="checkbox" name="combine" /> Combine all files
                         </div>
                         <button class="btn" type="submit">Download</button>
+                    </form>
+                </div>
+            </li>
+            <li data-nav="download_templates">
+                <button type="button"><span class="icon">&#128229;</span>Download Templates</button>
+                <div class="menu-panel">
+                    <ul>
+                        <li class="template">
+                            <a href="/templates/FlexiScript_CSV_Template.zip" target="_blank" download>CSV (Multi-File Zip)</a>
+                        </li>
+                        <li class="template">
+                            <a href="/templates/FlexiScript_Template.xls" target="_blank" download>XLS</a>
+                        </li>
+                        <li class="template">
+                            <a href="/templates/FlexiScript_Template.xlsx" target="_blank" download>XLSX</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li data-nav="theme">
+                <button type="button"><span class="icon">&#127912;</span>Theme</button>
+                <div class="menu-panel">
+                    <form>
+                        <label class="label label-header">Interface</label>
+                        <select class="input" name="gui_theme">
+                            <option value="light">Light</option>
+                            <option value="dark" selected="selected">Dark</option>
+                        </select>
+                        <label class="label label-header">Controls</label>
+                        <select class="input" name="controls_theme">
+                            <option value="light" selected="selected">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                        <button class="btn" type="submit">Update</button>
                     </form>
                 </div>
             </li>
