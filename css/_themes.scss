@@ -1,0 +1,58 @@
+.theme-gui-dark {
+    // Default settings
+}
+
+.theme-gui-light {
+    background: #fff;
+
+    #title {
+        color: #000;
+    }
+
+    #menu {
+        background: #fff;
+        color: #000;
+
+        li {
+            button[type="button"] {
+                color: #000;
+
+                &:hover {
+                    background: #ccc;
+                }
+            }
+        }
+    }
+
+    .btn {
+        border-color: #000;
+        background: #fff;
+        color: #000;
+    }
+}
+
+.theme-controls-dark {
+    .jexcel > div > table > thead > tr > td {
+        background: #555;
+    }
+    .jexcel > div > table > tbody > tr > td:first-child {
+        background: #333;
+    }
+    tr > td {
+        background: $mainBackground;
+        color: #eee;
+    }
+
+    .jexcel .highlight {
+        background: #888;
+    }
+
+    .input {
+        background: #111;
+        color: #eee;
+    }
+}
+
+.theme-controls-light {
+    // Default settings
+}
