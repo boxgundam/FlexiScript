@@ -1,5 +1,6 @@
 const savePrefix = 'autosave__';
 const lastSaveKey = 'lastAutosave__';
+const settingsKey = 'settings__';
 
 // Get save name for Localstorage
 function getSaveName(title) {
@@ -9,6 +10,23 @@ function getSaveName(title) {
 // Update last autosave
 function setLastLocalsave(save) {
     return localStorage.setItem(lastSaveKey, save);
+}
+
+function getSettings() {
+    let settingsString = localStorage.getItem(settingsKey);
+    let settingsJSON = {};
+
+    // Catch invalid JSON data
+    try {
+        settingsJSON = JSON.parse(settingsString) || {};
+    } catch (e) {
+        alert('Failed to load save data');
+    }
+    return settingsJSON;
+}
+
+function setSettings(options) {
+    localStorage.setItem(settingsKey, JSON.stringify(Object.assign(getSettings(), options)));
 }
 
 // List saves From Localstorage
@@ -32,7 +50,7 @@ function getLocalSave(save) {
 
     // Catch invalid JSON data
     try {
-        saveJSON = JSON.parse(saveString);
+        saveJSON = JSON.parse(saveString) || [];
     } catch (e) {
         alert('Failed to load save data');
     }

@@ -162,4 +162,14 @@ function Forms() {
 
         downloadZip(zip, `${ProjectTitle} RenPy`);
     });
+
+    // Import
+    $('[data-nav="theme"] form').on('submit', function(e) {
+        event.preventDefault();
+
+        let guiThemeField = $(this).find('[name="gui_theme"]');
+        let controlsThemeField = $(this).find('[name="controls_theme"]');
+        
+        setThemeClass(guiThemeField.val(), controlsThemeField.val());
+    });
 }

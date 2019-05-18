@@ -133,7 +133,9 @@ jQuery(document).ready(function($) {
     }
 
     // DEVELOPMENT ONLY: Open menu on page load
-    toggleMenu('import');
+    toggleMenu('theme');
+
+    init();
 });
 
 function toggleMenu(togglePanel) {
@@ -146,6 +148,12 @@ function toggleMenu(togglePanel) {
         if(!panelButton.length) return;
         panelButton[0].click();
     }
+}
+
+function init() {
+    let settings = getSettings();
+    if(settings.theme)
+        setThemeClass(settings.theme.gui, settings.theme.controls);
 }
 
 function autosave() {
@@ -243,4 +251,18 @@ function loadProject(saveData) {
         SpreadsheetTabs.tabs('option', 'active', 2);
     }
     autosave();
+}
+
+function setThemeClass(guiStyle, controlsStyle) {
+    $('body').attr('class', `theme-gui-${guiStyle} theme-controls-${controlsStyle}`);
+
+    $('[name="gui_theme"]').val(guiStyle);
+    $('[name="controls_theme"]').val(controlsStyle);
+
+    setSettings({
+        theme: {
+            gui: guiStyle,
+            controls: controlsStyle
+        }
+    });
 }
