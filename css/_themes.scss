@@ -2,57 +2,80 @@
     // Default settings
 }
 
+.theme-controls-light {
+    // Default settings
+}
+
 .theme-gui-light {
-    background: #fff;
+    background: $lightThemeBackground;
 
     #title {
-        color: #000;
+        color: $lightThemeMainTextColor;
     }
 
     #menu {
-        background: #fff;
-        color: #000;
+        background: $lightThemeMenuBackground;
+        color: $lightThemeMenuItemTextColor;
 
         li {
             button[type="button"] {
-                color: #000;
+                color: $lightThemeMenuItemTextColor;
 
                 &:hover {
-                    background: #ccc;
+                    background: $lightThemeMenuItemHoverBackground;
+                    color: $lightThemeMenuItemHoverTextColor;
                 }
+            }
+
+            li:hover {
+                background: $lightThemeMenuItemHoverBackground;
+                color: $lightThemeMenuItemHoverTextColor;
             }
         }
     }
 
     .btn {
-        border-color: #000;
-        background: #fff;
-        color: #000;
+        border-color: $lightThemeButtonBorder;
+        background: $lightThemeButtonBackground;
+        color: $lightThemeButtonTextColor;
+    }
+
+    #tabs {
+        background: $lightThemeBackground;
+
+        .ui-tabs-nav {
+            background: $lightThemeBackground;
+            border: $lightThemeBackground;
+
+            li {
+                background: $lightThemeButtonBackground;
+
+                a {
+                    color: $lightThemeButtonTextColor;
+                }
+            }
+        }
     }
 }
 
 .theme-controls-dark {
+    .input {
+        background: $darkControlsInputBackground;
+        color: $darkControlsTextColor;
+    }
+    
     .jexcel > div > table > thead > tr > td {
-        background: #555;
+        background: $darkControlsTableColumnHeaderBackground;
     }
     .jexcel > div > table > tbody > tr > td:first-child {
-        background: #333;
+        background: $darkControlsTableRowHeaderBackground;
     }
     tr > td {
-        background: $mainBackground;
-        color: #eee;
+        background: $darkControlsInputBackground;
+        color: $darkControlsTextColor;
     }
-
+    
     .jexcel .highlight {
-        background: #888;
+        background: $darkControlsTableCellHighlightBackground;
     }
-
-    .input {
-        background: #111;
-        color: #eee;
-    }
-}
-
-.theme-controls-light {
-    // Default settings
 }

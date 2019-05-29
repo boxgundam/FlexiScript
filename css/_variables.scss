@@ -2,6 +2,8 @@
 $mainBackground: #111;
 $mainTextColor: #eee;
 
+$mainInputBorderColor: #ddd;
+
 $buttonBorder: #eee;
 $buttonBackground: #111;
 $buttonTextColor: #eee;
@@ -24,3 +26,28 @@ $overlayBackground: #000;
 // $contextmenuItemHoverBackground: #d8d8d8;
 
 // $nodeChoiceBackground: salmon;
+
+/* ------------- Theme Variables ------------- */
+
+
+/* Light Interface */
+$lightThemeBackground: #fff;
+$lightThemeMainTextColor: #000;
+
+$lightThemeButtonBorder: #000;
+$lightThemeButtonBackground: #fff;
+$lightThemeButtonTextColor: #000;
+
+$lightThemeMenuBackground: $lightThemeBackground;
+$lightThemeMenuItemTextColor: $lightThemeMainTextColor;
+$lightThemeMenuItemHoverBackground: #ccc;
+$lightThemeMenuItemHoverTextColor: #000;
+
+/* Dark Controls */
+$darkControlsTextColor: #eee;
+
+$darkControlsInputBackground: #111;
+
+$darkControlsTableColumnHeaderBackground: #555;
+$darkControlsTableRowHeaderBackground: #333;
+$darkControlsTableCellHighlightBackground: #888;

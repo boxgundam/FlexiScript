@@ -2,7 +2,9 @@
 
 #tabs {
     > .ui-tabs-panel {
+        height:600px;
         overflow: auto;
+        resize: vertical;
     }
     
     li .ui-icon-close { 

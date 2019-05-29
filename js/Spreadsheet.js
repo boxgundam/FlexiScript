@@ -51,8 +51,8 @@ function loadSpreadsheet(element, type, data = []) {
                     { type: 'text' }
                 ],
                 csvHeaders:true,
-                tableOverflow:true,
-                tableHeight: 600,
+                // tableOverflow:true,
+                // tableHeight: 600,
                 onchange: function(obj, cel, val) {
                     autosave();
                 }
@@ -78,8 +78,8 @@ function loadSpreadsheet(element, type, data = []) {
                     { type: 'text' }
                 ],
                 csvHeaders:true,
-                tableOverflow:true,
-                tableHeight: 600,
+                // tableOverflow:true,
+                // tableHeight: 600,
                 onload: function(obj, cel, val) {
                     let data = obj.jexcel('getData', false);
                     SpreadsheetCharacters = [];
@@ -139,8 +139,8 @@ function loadSpreadsheet(element, type, data = []) {
                     { type: 'text', wordWrap: true }
                 ],
                 csvHeaders:true,
-                tableOverflow:true,
-                tableHeight: 600,
+                // tableOverflow:true,
+                // tableHeight: 600,
                 onchange: function(obj, cel, val) {
                     autosave();
                 }
