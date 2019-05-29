@@ -133,7 +133,7 @@ jQuery(document).ready(function($) {
     }
 
     // DEVELOPMENT ONLY: Open menu on page load
-    toggleMenu('theme');
+    // toggleMenu('import');
 
     init();
 });
